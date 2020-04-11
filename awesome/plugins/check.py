@@ -16,9 +16,12 @@ async def _(session: CommandSession):
         n_name = '小王'
     arg = session.get('city', prompt=n_name + '，你要打卡哪个任务呢')
     tasks = await check_task(arg, n_name)
-    await session.send(n_name + '现在，今天的计划是')
-    for i in range(len(tasks)):
-        await session.send(str(i + 1) + ' ' + tasks[i])
+    if not tasks:
+        await session(n_name + '， 你今天的任务都完成啦！')
+    if tasks:
+        await session.send(n_name + '你还没有完成的计划是')
+        for i in range(len(tasks)):
+            await session.send(str(i + 1) + ' ' + tasks[i])
 
 
 # on_natural_language 装饰器将函数声明为一个自然语言处理器

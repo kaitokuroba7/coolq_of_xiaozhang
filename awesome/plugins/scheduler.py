@@ -5,18 +5,12 @@ import pytz
 from aiocqhttp.exceptions import Error as CQHttpError
 
 
-
 @nonebot.scheduler.scheduled_job('cron', hour='*')
 async def _():
     bot = nonebot.get_bot()
     now = datetime.now(pytz.timezone('Asia/Shanghai'))
     
-    if now.weekday() == 1 and now.hour == 21:
-        try:
-            await bot.send_private_msg(user_id=1027380683,
-                                 message='小王，小王！《青春有你2》开始啦，快去看吧！')
-        except CQHttpError:
-            pass
+
     
     
     if now.weekday() == 3 and now.hour == 20:
@@ -43,7 +37,7 @@ async def _():
     if now.hour == 0:
         try:
             await bot.send_group_msg(group_id=1064439850,
-                                 message='睡觉啦，睡觉啦，再不睡觉明天就起不来啦！')
+                                 message='睡觉啦，睡觉啦，小王明天还要考研，实习，改论文！')
         except CQHttpError:
             pass
             
@@ -51,7 +45,7 @@ async def _():
     if now.hour == 24:
         try:
             await bot.send_group_msg(group_id=1064439850,
-                                 message='睡觉啦，睡觉啦，再不睡觉明天就起不来啦！')
+                                 message='睡觉啦，睡觉啦，小王明天还要考研，实习，改论文！')
         except CQHttpError:
             pass            
             
