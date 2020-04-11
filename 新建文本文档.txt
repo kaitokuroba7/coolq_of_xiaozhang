@@ -1,0 +1,48 @@
+docker run -ti --rm  -v /coolq:/home/user/coolq richardchien/cqhttp:latest
+
+
+docker 
+
+
+
+$ docker run -ti --rm --name cqhttp-test \
+             -v $(pwd)/coolq:/home/user/coolq \  # 将宿主目录挂载到容器内用于持久化 酷Q 的程序文件
+             -p 9000:9000 \  # noVNC 端口，用于从浏览器控制 酷Q
+             -p 5700:5700 \  # HTTP API 插件开放的端口
+             -e COOLQ_ACCOUNT=123456 \ # 要登录的 QQ 账号，可选但建议填
+             -e CQHTTP_POST_URL=http://example.com:8080 \  # 事件上报地址
+             -e CQHTTP_SERVE_DATA_FILES=yes \  # 允许通过 HTTP 接口访问 酷Q 数据文件
+       
+
+
+$ docker run -d --name cqhttp-test \
+             -v $(pwd)/coolq:/home/user/coolq \  # 将宿主目录挂载到容器内用于持久化 酷Q 的程序文件
+             -p 9000:9000 \  # noVNC 端口，用于从浏览器控制 酷Q
+             -p 5700:5700 \  # HTTP API 插件开放的端口
+             -e COOLQ_ACCOUNT=123456 \ # 要登录的 QQ 账号，可选但建议填
+             -e CQHTTP_POST_URL=http://172.17.0.1:8080 \  # 事件上报地址
+             -e CQHTTP_SERVE_DATA_FILES=yes   richardchien/cqhttp:latest\  # 允许通过 HTTP 接口访问 酷Q 数据文件
+       
+
+       
+
+docker run -d --rm --name cqhttp-test   -v  /my_coolq:/home/user/coolq    -p 9000:9000   -p 5700:5700   -e CQHTTP_SERVE_DATA_FILES=yes   -e CQHTTP_POST_URL=http://172.17.0.1:8080  -e COOLQ_ACCOUNT=1178655391  40d5c6c106af 
+
+
+docker run -d  -v  /my_coolq:/home/user/coolq  richardchien/cqhttp:latest
+docker run -d    -p 9000:9000  richardchien/cqhttp:latest
+docker run -d    -p 5700:5700  richardchien/cqhttp:latest
+docker run -d -e CQHTTP_SERVE_DATA_FILES=yes  richardchien/cqhttp:latest
+docker run -d -e CQHTTP_POST_URL=http://172.17.0.1:8080   richardchien/cqhttp:latest  # 事件上报地址
+docker run -d -e COOLQ_ACCOUNT=1178655391 richardchien/cqhttp:latest
+
+
+ps -fA | grep python 
+kill -9
+
+
+
+
+
+
+run  -d --name  cqhttp-test -v /zj_coolq:/home/user/coolq -p 9000:9000 -p 5700:5700 -e COOLQ_ACCOUNT=123456 -e CQHTTP_POST_URL=http://localhost:8080 -e CQHTTP_SERVE_DATA_FILES=yes richardchien/cqhttp:latest
