@@ -9,10 +9,7 @@ from aiocqhttp.exceptions import Error as CQHttpError
 async def _():
     bot = nonebot.get_bot()
     now = datetime.now(pytz.timezone('Asia/Shanghai'))
-    
 
-    
-    
     if now.weekday() == 3 and now.hour == 20:
         try:
             await bot.send_group_msg(group_id=1064439850,
