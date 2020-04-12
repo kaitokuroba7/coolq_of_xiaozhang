@@ -5,7 +5,7 @@ from nonebot.default_config import *
 import config
 
 
-@on_command('task', aliases=['使用帮助', '帮助', '使用方法'])
+@on_command('task')
 async def _(session: CommandSession):
     id = session.event.user_id
     if id == 1027380683:

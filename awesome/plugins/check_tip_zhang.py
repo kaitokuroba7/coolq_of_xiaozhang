@@ -64,6 +64,17 @@ async def _():
         pass
 
 
+@nonebot.scheduler.scheduled_job('cron', hour=8, minute=30)
+async def _():
+    """ 提醒任务制定 """
+    bot = nonebot.get_bot()
+    try:
+        await bot.send_group_msg(group_id=1064439850,
+                                 message='新的一天，把今天的任务告诉饺子吧！')
+    except CQHttpError:
+        pass
+
+
 async def get_current_task(n_name):
     if n_name == '小张':
         with open('xiaozhang_task.txt') as f_obj:

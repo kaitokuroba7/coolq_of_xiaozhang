@@ -16,8 +16,8 @@ async def _(session: CommandSession):
         n_name = '小王'
     tasks = await show_task(n_name)
     if not tasks:
-        await session(n_name + '，你今天的任务都完成啦！')
-    if tasks:
+        await session.send(n_name + '，你今天的任务都完成啦！饺子夸你哦！么么哒！')
+    elif tasks:
         await session.send(n_name + '你的当前任务是')
         for i in range(len(tasks)):
             await session.send(str(i + 1) + ' ' + tasks[i])
@@ -26,7 +26,7 @@ async def _(session: CommandSession):
 # on_natural_language 装饰器将函数声明为一个自然语言处理器
 # keywords 表示需要响应的关键词，类型为任意可迭代对象，元素类型为 str
 # 如果不传入 keywords，则响应所有没有被当作命令处理的消息
-@on_natural_language(keywords={'我的任', '我的计', '当前任', '当前计'})
+@on_natural_language(keywords={'列表'})
 async def _(session: NLPSession):
     # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
     return IntentCommand(90.0, 'My_task')
