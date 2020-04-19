@@ -6,16 +6,14 @@
 from nonebot import MessageSegment
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
+from .get_name import get_nickname
+from .get_current_task import get_current_task
 
 
 @on_command('My_task')
 async def _(session: CommandSession):
-    id = session.event.user_id
-    if id == 1027380683:
-        n_name = '小张'
-    elif id == 844814749:
-        n_name = '小王'
-    tasks = await show_task(n_name)
+    n_name = get_nickname(session)  # 得到昵称
+    tasks = await get_current_task(n_name)
     if not tasks:
         await session.send(MessageSegment.at(id) + n_name + '，你今天的任务都完成啦！饺子夸你哦！么么哒！')
     elif tasks:
@@ -33,16 +31,5 @@ async def _(session: NLPSession):
     return IntentCommand(90.0, 'My_task')
 
 
-async def show_task(n_name):
-    if n_name == '小张':
-        with open('xiaozhang_task.txt') as f_obj:
-            content = f_obj.read()
-            content = content.split()
 
-    elif n_name == '小王':
-        with open('xiaowang_task.txt') as f_obj:
-            content = f_obj.read()
-            content = content.split()
-
-    return content
 

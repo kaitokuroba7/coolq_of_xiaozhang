@@ -3,12 +3,8 @@
 # 开发日期 ：  12:20
 # 文件名 ： music.py
 # 开发工具： PyCharm
-import logging
-import asyncio
 import re
-import time
 from typing import Optional
-
 from aiocache import cached
 from nonebot import MessageSegment
 from nonebot import on_command, CommandSession
@@ -16,6 +12,7 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from nonebot.command.argfilter import extractors, validators
 import random
 import requests
+from .get_name import get_nickname
 
 __plugin_name__ = '点歌'
 
@@ -35,13 +32,13 @@ async def search_song_id(keyword: str, session: CommandSession) -> Optional[int]
 
     try:
         if payload['result']['songs'][0]['artists'][0]['id'] == 1046043:
-            await session.send(MessageSegment.at(844814749)+' 开心，饺子搜到了最爱的女友的歌！')
+            await session.send(MessageSegment.at(844814749) + ' 开心，饺子搜到了最爱的女友的歌！')
             i = random.randint(0, 29)
             return payload['result']['songs'][i]['id']
 
         for i in range(30):
             if payload['result']['songs'][i]['artists'][0]['id'] == 1046043:
-                await session.send(MessageSegment.at(844814749)+' 开心，饺子搜到了最爱的女友的歌！')
+                await session.send(MessageSegment.at(844814749) + ' 开心，饺子搜到了最爱的女友的歌！')
                 return payload['result']['songs'][i]['id']
 
         if i == 29:
@@ -53,12 +50,8 @@ async def search_song_id(keyword: str, session: CommandSession) -> Optional[int]
 
 @on_command('music', aliases=['点歌', '音乐'], only_to_me=False)
 async def music(session: CommandSession):
-    id = session.event.user_id
-    if id == 1027380683:
-        n_name = '小张'
-    elif id == 844814749:
-        n_name = '小王'
-    keyword = session.get('keyword', prompt=n_name+',你想听什么歌呢？',
+    n_name = get_nickname(session)  # 得到昵称
+    keyword = session.get('keyword', prompt=n_name + ',你想听什么歌呢？',
                           arg_filters=[
                               extractors.extract_text,
                               str.strip,

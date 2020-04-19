@@ -3,20 +3,17 @@
 # 开发日期 ：  12:46
 # 文件名 ： check_tip.py
 # 开发工具： PyCharm
-from datetime import datetime
 from nonebot import MessageSegment
-
 import nonebot
-import pytz
 from aiocqhttp.exceptions import Error as CQHttpError
 from .weather.data_source import get_weather_of_city
+from .get_current_task import get_current_task
 
 
 @nonebot.scheduler.scheduled_job('cron', hour=21, minute=10)
 async def _():
     """ 小张的提醒 """
     bot = nonebot.get_bot()
-    # now = datetime.now(pytz.timezone('Asia/Shanghai'))
 
     try:
         n_name = '小张'
@@ -43,8 +40,6 @@ async def _():
 async def _():
     """ 小王的提醒 """
     bot = nonebot.get_bot()
-    # now = datetime.now(pytz.timezone('Asia/Shanghai'))
-
     try:
         n_name = '小王'
         current_task = await get_current_task(n_name)
@@ -120,13 +115,4 @@ async def _():
         pass
 
 
-async def get_current_task(n_name):
-    if n_name == '小张':
-        with open('xiaozhang_task.txt') as f_obj:
-            content = f_obj.read()
-            content = content.split()
-    elif n_name == '小王':
-        with open('xiaowang_task.txt') as f_obj:
-            content = f_obj.read()
-            content = content.split()
-    return content
+

@@ -3,7 +3,6 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from jieba import posseg
 
 from .data_source import get_weather_of_city
-import requests
 
 
 @on_command('weather', aliases=('天气', '天气预报', '查天气'))
