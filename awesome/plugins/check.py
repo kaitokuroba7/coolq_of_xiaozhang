@@ -6,7 +6,7 @@
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 from .my_task import show_task
-
+from nonebot import MessageSegment
 
 @on_command('check')
 async def check(session: CommandSession):
@@ -18,9 +18,9 @@ async def check(session: CommandSession):
     current_task = await show_task(n_name)
 
     if not current_task:
-        await session.send(n_name + '，你今天的任务都完成啦！饺子夸你哦！么么哒！')
+        await session.send(MessageSegment.at(id) + n_name + '，你今天的任务都完成啦！饺子夸你哦！么么哒！')
     else:
-        await session.send(n_name + '当前的计划列表是：')
+        await session.send(MessageSegment.at(id) + n_name + '当前的计划列表是：')
         for i in range(len(current_task)):
             await session.send(str(i + 1) + ' ' + current_task[i])
 

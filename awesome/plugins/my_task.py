@@ -3,6 +3,7 @@
 # 开发日期 ：  14:02
 # 文件名 ： my_task.py
 # 开发工具： PyCharm
+from nonebot import MessageSegment
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 
@@ -16,9 +17,9 @@ async def _(session: CommandSession):
         n_name = '小王'
     tasks = await show_task(n_name)
     if not tasks:
-        await session.send(n_name + '，你今天的任务都完成啦！饺子夸你哦！么么哒！')
+        await session.send(MessageSegment.at(id) + n_name + '，你今天的任务都完成啦！饺子夸你哦！么么哒！')
     elif tasks:
-        await session.send(n_name + '你的当前任务是')
+        await session.send(MessageSegment.at(id) + n_name + '你的当前任务是')
         for i in range(len(tasks)):
             await session.send(str(i + 1) + ' ' + tasks[i])
 

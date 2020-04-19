@@ -4,10 +4,12 @@
 # 文件名 ： check_tip.py
 # 开发工具： PyCharm
 from datetime import datetime
+from nonebot import MessageSegment
 
 import nonebot
 import pytz
 from aiocqhttp.exceptions import Error as CQHttpError
+from .weather.data_source import get_weather_of_city
 
 
 @nonebot.scheduler.scheduled_job('cron', hour=21, minute=10)
@@ -21,10 +23,10 @@ async def _():
         current_task = await get_current_task(n_name)
         if not current_task:
             await bot.send_group_msg(group_id=1064439850,
-                                     message='小张今天的任务都做完啦！饺子夸你哦！')
+                                     message=MessageSegment.at(1027380683) + '小张今天的任务都做完啦！饺子夸你哦！')
         if current_task:
             await bot.send_group_msg(group_id=1064439850,
-                                     message='小张今天还没完成的任务')
+                                     message=MessageSegment.at(1027380683) + '小张今天还没完成的任务')
 
             for i in range(len(current_task)):
                 await bot.send_group_msg(group_id=1064439850,
@@ -48,10 +50,10 @@ async def _():
         current_task = await get_current_task(n_name)
         if not current_task:
             await bot.send_group_msg(group_id=1064439850,
-                                     message='小王今天的任务都做完啦！饺子夸你哦！')
+                                     message=MessageSegment.at(844814749) + '小王今天的任务都做完啦！饺子夸你哦！')
         if current_task:
             await bot.send_group_msg(group_id=1064439850,
-                                     message='小王今天还没完成的任务')
+                                     message=MessageSegment.at(844814749) + '小王今天还没完成的任务')
 
             for i in range(len(current_task)):
                 await bot.send_group_msg(group_id=1064439850,
@@ -70,7 +72,50 @@ async def _():
     bot = nonebot.get_bot()
     try:
         await bot.send_group_msg(group_id=1064439850,
-                                 message='新的一天，把今天的任务告诉饺子吧！')
+                                 message=MessageSegment.at(844814749) + MessageSegment.at(1027380683)
+                                 + '新的一天，把今天的任务告诉饺子吧！')
+    except CQHttpError:
+        pass
+
+
+@nonebot.scheduler.scheduled_job('cron', hour=7, minute=5)
+async def _():
+    """ 小王的天气提醒 """
+    bot = nonebot.get_bot()
+    weather_rep = await get_weather_of_city('奉化')
+    try:
+        await bot.send_group_msg(group_id=1064439850,
+                                 message=MessageSegment.at(844814749) + '早上好，饺子来预报天气啦！')
+        await bot.send_group_msg(group_id=1064439850,
+                                 message='小王，' + weather_rep + '小王，饺子爱你噢！')
+    except CQHttpError:
+        pass
+
+
+@nonebot.scheduler.scheduled_job('cron', hour=7, minute=6)
+async def _():
+    """ 小张的天气提醒 """
+    bot = nonebot.get_bot()
+    weather_rep = await get_weather_of_city('舟山')
+    try:
+        await bot.send_group_msg(group_id=1064439850,
+                                 message=MessageSegment.at(1027380683) + '早上好，饺子来预报天气啦！')
+        await bot.send_group_msg(group_id=1064439850,
+                                 message='小张，' + weather_rep)
+    except CQHttpError:
+        pass
+
+
+@nonebot.scheduler.scheduled_job('cron', hour=0, minute=29)
+async def _():
+    """ 0：30的提醒 """
+    bot = nonebot.get_bot()
+    try:
+        await bot.send_group_msg(group_id=1064439850,
+                                 message=MessageSegment.at(844814749) + ' 好啦，快睡觉吧小王！你不睡饺子睡不着~')
+        await bot.send_group_msg(group_id=1064439850,
+                                 message=MessageSegment.at(1027380683) + '不要再勾搭小王啦，快去睡！')
+
     except CQHttpError:
         pass
 
