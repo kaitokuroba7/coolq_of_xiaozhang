@@ -1,5 +1,7 @@
 # async def get_weather_of_city(city: str) -> str:
 import requests
+
+
 async def get_weather_of_city(city: str) -> str:
     ErrorList = ['TimeoutError', 'ConnectionError', 'HTTPError', 'TooManyRedirects', 'OtherError']
     url = 'http://jisutqybmf.market.alicloudapi.com/weather/query'

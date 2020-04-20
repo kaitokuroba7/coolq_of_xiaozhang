@@ -7,15 +7,12 @@ from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 from .get_current_task import get_current_task
 from nonebot import MessageSegment
+from .get_name import get_nickname
 
 
 @on_command('check')
 async def check(session: CommandSession):
-    id = session.event.user_id
-    if id == 1027380683:
-        n_name = '小张'
-    elif id == 844814749:
-        n_name = '小王'
+    n_name = get_nickname(session)
     current_task = await get_current_task(n_name)
 
     if not current_task:
@@ -72,4 +69,3 @@ async def get_check_command(session, n_name):
     arg = session.get('', prompt=n_name + '，你要打卡哪个任务呢')
     tasks = await check_task(arg, n_name)
     await result_of_check(session, tasks, arg, n_name)
-

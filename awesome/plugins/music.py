@@ -38,7 +38,13 @@ async def search_song_id(keyword: str, session: CommandSession) -> Optional[int]
 
         for i in range(30):
             if payload['result']['songs'][i]['artists'][0]['id'] == 1046043:
-                await session.send(MessageSegment.at(844814749) + ' 开心，饺子搜到了最爱的女友的歌！')
+                await session.send(MessageSegment.at(844814749) + MessageSegment.face(21)
+                                   + ' 开心，饺子搜到了最爱的女友的歌！')
+                return payload['result']['songs'][i]['id']
+            elif payload['result']['songs'][i]['artists'][0]['id'] == 1180155:
+                await session.send(MessageSegment.at(844814749) + MessageSegment.face(13)
+                                   + ' 饺子知道了，'
+                                   '是捕梦网的歌，中国第四大运营商')
                 return payload['result']['songs'][i]['id']
 
         if i == 29:

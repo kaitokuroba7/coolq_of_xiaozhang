@@ -8,11 +8,14 @@ import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
 from .weather.data_source import get_weather_of_city
 from .get_current_task import get_current_task
+"""
+这个模块里有每日的打卡提醒、天气提醒、制定计划提醒、睡觉的提醒
+"""
 
 
 @nonebot.scheduler.scheduled_job('cron', hour=21, minute=10)
 async def _():
-    """ 小张的提醒 """
+    """ 小张的每日任务提醒 """
     bot = nonebot.get_bot()
 
     try:
@@ -38,7 +41,7 @@ async def _():
 
 @nonebot.scheduler.scheduled_job('cron', hour=21, minute=5)
 async def _():
-    """ 小王的提醒 """
+    """ 小王的每日任务提醒 """
     bot = nonebot.get_bot()
     try:
         n_name = '小王'
@@ -68,7 +71,7 @@ async def _():
     try:
         await bot.send_group_msg(group_id=1064439850,
                                  message=MessageSegment.at(844814749) + MessageSegment.at(1027380683)
-                                 + '新的一天，把今天的任务告诉饺子吧！')
+                                 + ' 新的一天，把今天的任务告诉饺子吧！')
     except CQHttpError:
         pass
 
@@ -80,7 +83,7 @@ async def _():
     weather_rep = await get_weather_of_city('奉化')
     try:
         await bot.send_group_msg(group_id=1064439850,
-                                 message=MessageSegment.at(844814749) + '早上好，饺子来预报天气啦！')
+                                 message=MessageSegment.at(844814749) + ' 早上好，饺子来预报天气啦！')
         await bot.send_group_msg(group_id=1064439850,
                                  message='小王，' + weather_rep + '小王，饺子爱你噢！')
     except CQHttpError:
@@ -94,7 +97,7 @@ async def _():
     weather_rep = await get_weather_of_city('舟山')
     try:
         await bot.send_group_msg(group_id=1064439850,
-                                 message=MessageSegment.at(1027380683) + '早上好，饺子来预报天气啦！')
+                                 message=MessageSegment.at(1027380683) + ' 早上好，饺子来预报天气啦！')
         await bot.send_group_msg(group_id=1064439850,
                                  message='小张，' + weather_rep)
     except CQHttpError:
