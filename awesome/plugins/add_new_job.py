@@ -26,14 +26,22 @@ async def _(session: CommandSession):
     news_time = text_list[1] + ' 2020'
     # newsTime = '0404 15:50'
     GMT_FORMAT = '%m%d%H%M %Y'
+
     try:
         newsTime = datetime.datetime.strptime(news_time, GMT_FORMAT)
-        if text_list[2] == '小王':
+        try:
+            print(text_list[2])
+        except IndexError:
+            text_list.append('无')
+        if text_list[2] == '无':
+            pass
+        elif text_list[2] == '小王':
             usr_id = 844814749
             n_name = '小王'
         elif text_list[2] == '小张':
             usr_id = 1027380683
             n_name = '小张'
+
         await session.send(MessageSegment.face(21)
                            + '开心！计划任务成功！饺子将在北京时间'
                              '“%s”提醒你哦~' % newsTime)
