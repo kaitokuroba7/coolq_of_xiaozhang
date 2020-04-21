@@ -10,7 +10,7 @@ from nonebot import MessageSegment
 from ..common_package.get_name import get_nickname
 
 
-@on_command('check')
+@on_command('打卡')
 async def check(session: CommandSession):
     n_name = get_nickname(session)
     current_task = await get_current_task(n_name)
@@ -31,7 +31,7 @@ async def check(session: CommandSession):
 @on_natural_language(keywords={'打卡'})
 async def _():
     # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
-    return IntentCommand(90.0, 'check')
+    return IntentCommand(90.0, '打卡')
 
 
 async def check_task(arg, n_name):
