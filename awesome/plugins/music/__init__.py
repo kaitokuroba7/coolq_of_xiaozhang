@@ -12,7 +12,7 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from nonebot.command.argfilter import extractors, validators
 import random
 import requests
-from .get_name import get_nickname
+from ..common_package.get_name import get_nickname
 
 __plugin_name__ = '点歌'
 

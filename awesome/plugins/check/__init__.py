@@ -5,9 +5,9 @@
 # 开发工具： PyCharm
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
-from .get_current_task import get_current_task
+from ..common_package.get_current_task import get_current_task
 from nonebot import MessageSegment
-from .get_name import get_nickname
+from ..common_package.get_name import get_nickname
 
 
 @on_command('check')

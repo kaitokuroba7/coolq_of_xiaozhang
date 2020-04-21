@@ -6,8 +6,8 @@
 from nonebot import MessageSegment
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
-from .weather.data_source import get_weather_of_city
-from .get_current_task import get_current_task
+from ..weather.data_source import get_weather_of_city
+from ..common_package.get_current_task import get_current_task
 """
 这个模块里有每日的打卡提醒、天气提醒、制定计划提醒、睡觉的提醒
 """

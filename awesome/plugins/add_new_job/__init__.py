@@ -9,7 +9,7 @@ from jieba import posseg
 import datetime
 from apscheduler.triggers.date import DateTrigger # 一次性触发器
 from nonebot import on_command, scheduler
-from .get_name import get_nickname
+from ..common_package.get_name import get_nickname
 from nonebot import MessageSegment
 
 
