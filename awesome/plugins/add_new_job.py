@@ -3,6 +3,7 @@
 # 开发日期 ：  18:20
 # 文件名 ： add_new_job.py
 # 开发工具： PyCharm
+import sys
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 from jieba import posseg
