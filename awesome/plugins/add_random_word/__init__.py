@@ -15,7 +15,7 @@ import nonebot
 
 @nonebot.scheduler.scheduled_job('cron', hour=0, minute=1)
 async def _():
-
+    """ 在随机时间增加情话 """
     delta = datetime.timedelta(hours=random.randint(9,23), minutes= random.randint(1, 58))
     # delta = datetime.timedelta(minutes=1)
     trigger = DateTrigger(
