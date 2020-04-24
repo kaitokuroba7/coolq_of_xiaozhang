@@ -13,10 +13,10 @@ import random
 import nonebot
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=18, minute=18)
+@nonebot.scheduler.scheduled_job('cron', hour=0, minute=1)
 async def _():
 
-    delta = datetime.timedelta(hours=random.randint(1,4), minutes= random.randint(1, 59))
+    delta = datetime.timedelta(hours=random.randint(9,23), minutes= random.randint(1, 58))
     # delta = datetime.timedelta(minutes=1)
     trigger = DateTrigger(
         run_date=datetime.datetime.now() + delta 
