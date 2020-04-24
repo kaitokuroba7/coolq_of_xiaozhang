@@ -76,6 +76,6 @@ async def _():
             await bot.send_group_msg(group_id=1064439850,
                                      message=f'饺子来报时啦！现在是北京时间{now.hour}点整啦！')
             await bot.send_group_msg(group_id=1064439850,
-                                     message=MessageSegment.face(21)+'饺子是奶油馅的，快来咬我啊嗷嗷~~')
+                                     message=MessageSegment.face(21)+'饺子有一点点甜,一点点可爱，还有很多很多喜欢你们~')
         except CQHttpError:
             pass
