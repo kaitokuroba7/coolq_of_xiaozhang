@@ -24,9 +24,7 @@ async def _():
         content = ''.join(lines)
     bot = nonebot.get_bot()
     try:
-        await bot.send_group_msg(group_id=1064439850,
-                                 message=MessageSegment.at(844814749) + MessageSegment.at(1027380683)
-                                 + '饺子今日情话:')
+        await bot.send_group_msg(group_id=1064439850, message='饺子今日情话:')
         await bot.send_group_msg(group_id=1064439850, message=word.rstrip())                      
         await bot.send_private_msg(user_id=844814749, message='小王~'+word.strip())
     except CQHttpError:
