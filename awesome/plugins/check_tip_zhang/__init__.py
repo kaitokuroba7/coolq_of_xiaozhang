@@ -8,6 +8,7 @@ import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
 from ..weather.data_source import get_weather_of_city
 from ..common_package.get_current_task import get_current_task
+from ..common_package.get_love_word import get_love_word
 """
 这个模块里有每日的打卡提醒、天气提醒、制定计划提醒、睡觉的提醒
 """
@@ -16,12 +17,7 @@ from ..common_package.get_current_task import get_current_task
 @nonebot.scheduler.scheduled_job('cron', hour=17, minute=30)
 async def _():
     """ 饺子的每日情话 """
-    filepath = "python_files/coolq_of_xiaozhang/lover's prattle.txt" 
-    with open(filepath) as obj_file:
-        lines = obj_file.readlines()
-        word = lines[0]
-        lines.pop(0)
-        content = ''.join(lines)
+    word = get_love_word()
     bot = nonebot.get_bot()
     try:
         await bot.send_group_msg(group_id=1064439850, message='饺子今日情话:')
@@ -29,8 +25,6 @@ async def _():
         await bot.send_private_msg(user_id=844814749, message='小王~'+word.strip())
     except CQHttpError:
         pass
-    with open(filepath, 'w') as obj_file:
-        obj_file.write(content)
 
 
 
