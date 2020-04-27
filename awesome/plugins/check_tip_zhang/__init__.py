@@ -20,9 +20,9 @@ async def _():
     word = get_love_word()
     bot = nonebot.get_bot()
     try:
-        await bot.send_group_msg(group_id=1064439850, message='饺子今日情话:')
-        await bot.send_group_msg(group_id=1064439850, message=word.rstrip())                      
-        await bot.send_private_msg(user_id=844814749, message='小王~'+word.strip())
+        await bot.send_group_msg(group_id=1064439850, message=MessageSegment.at(844814749))
+        await bot.send_group_msg(group_id=1064439850, message='小王~'+word.rstrip())                      
+        # await bot.send_private_msg(user_id=844814749, message='小王~'+word.strip())
     except CQHttpError:
         pass
 
