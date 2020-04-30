@@ -9,6 +9,8 @@ from nonebot import on_command, scheduler
 from aiocqhttp.exceptions import Error as CQHttpError
 from ..common_package.get_name import get_nickname
 from ..common_package.get_love_word import get_love_word
+from ..common_package.get_love_word import get_morning_word
+from ..common_package.get_love_word import get_nick_name
 from nonebot import MessageSegment
 import random
 import nonebot
@@ -80,6 +82,8 @@ async def _():
         run_date=datetime.datetime.now() + delta 
     )
     bot = nonebot.get_bot()
+    nick_name = get_nick_name()
+    morning_word = get_morning_word()
     try:
         await bot.send_private_msg(user_id=1027380683, message='早安任务在%s发送' %str(trigger))
 
@@ -91,7 +95,7 @@ async def _():
         func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
         trigger=trigger,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
-        kwargs={'user_id':844814749, 'message':'早安啊，小王~ 今天饺子和小张也喜欢你~'},
+        kwargs={'user_id':844814749, 'message':'早安啊~'+nick_name.strip()+'，'+morning_word.strip()+'~'},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
