@@ -9,6 +9,8 @@ from aiocqhttp.exceptions import Error as CQHttpError
 from ..weather.data_source import get_weather_of_city
 from ..common_package.get_current_task import get_current_task
 from ..common_package.get_love_word import get_love_word
+from ..common_package.morning_report import plot_morning_get_up
+import datetime
 """
 这个模块里有每日的打卡提醒、天气提醒、制定计划提醒、睡觉的提醒
 """
@@ -25,6 +27,20 @@ async def _():
         # await bot.send_private_msg(user_id=844814749, message='小王~'+word.strip())
     except CQHttpError:
         pass
+
+
+@nonebot.scheduler.scheduled_job('cron', hour=22, minute=29)
+async def _():
+    """ 早期报告 """
+    bot = nonebot.get_bot()
+    now = datetime.datetime.now()
+    try:
+        plot_morning_get_up()
+        await bot.send_group_msg(group_id=1064439850,
+                                    message=MessageSegment.image('%s.png' %str(now.date())))
+    except CQHttpError:
+        pass
+
 
 
 

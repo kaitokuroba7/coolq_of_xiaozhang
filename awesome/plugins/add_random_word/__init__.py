@@ -73,7 +73,7 @@ async def _():
 
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=8, minute=1)
+@nonebot.scheduler.scheduled_job('cron', hour=7, minute=1)
 async def _():
     """ 早安功能 """
     delta = datetime.timedelta(minutes= random.randint(1, 58))
