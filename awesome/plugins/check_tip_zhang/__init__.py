@@ -13,31 +13,49 @@ from ..common_package.morning_report import plot_morning_get_up
 import datetime
 """
 这个模块里有每日的打卡提醒、天气提醒、制定计划提醒、睡觉的提醒
+这里的时间都是任意的
 """
 
 
 @nonebot.scheduler.scheduled_job('cron', hour=17, minute=30)
 async def _():
-    """ 饺子的每日情话 """
-    word = get_love_word()
+    """ 傍晚的情话 """
     bot = nonebot.get_bot()
-    try:
-        await bot.send_group_msg(group_id=1064439850, message=MessageSegment.at(844814749))
+    word = get_love_word()
+    try: 
+        await bot.send_group_msg(group_id=1064439850, message=MessageSegment.at(844814749))                                     
         await bot.send_group_msg(group_id=1064439850, message='小王~'+word.rstrip())                      
-        # await bot.send_private_msg(user_id=844814749, message='小王~'+word.strip())
+        # await bot.send_private_msg(user_id=844814749, message='饺子P的照片~')
+        # await bot.send_private_msg(user_id=1027380683, message=MessageSegment.image('2020-05-03.png'))
     except CQHttpError:
         pass
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=22, minute=29)
+
+@nonebot.scheduler.scheduled_job('cron', hour=15, minute=35)
 async def _():
-    """ 早期报告 """
+    """ 临时任务 """
+    bot = nonebot.get_bot()
+    now = datetime.datetime.now()
+    if str(now.date()) == '2020-05-03':
+        try:                                      
+            # await bot.send_group_msg(group_id=1064439850, message='小王~'+word.rstrip())                      
+            # await bot.send_private_msg(user_id=844814749, message='饺子P的照片~')
+            await bot.send_private_msg(user_id=1027380683, message=MessageSegment.image('2020-05-03.png'))
+        except CQHttpError:
+            pass
+
+
+@nonebot.scheduler.scheduled_job('cron', hour=19, minute=45)
+async def _():
+    """ 早起报告 """
     bot = nonebot.get_bot()
     now = datetime.datetime.now()
     try:
         plot_morning_get_up()
         await bot.send_group_msg(group_id=1064439850,
-                                    message=MessageSegment.image('%s.png' %str(now.date())))
+                                message=MessageSegment.image('%s.png' %str(now.date())))
+        await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('%s.png' %str(now.date())) )
     except CQHttpError:
         pass
 

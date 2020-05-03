@@ -38,10 +38,22 @@ async def tuling(session: CommandSession):
         await bot.send_private_msg(user_id=1027380683, message='小王的消息：'+message)
         time = datetime.datetime.now()
         if time.hour >6 and time.hour < 13:
-            time_in_txt = get_time_tag()
+            filepath_time_tag = "python_files/coolq_of_xiaozhang/database/date.txt"
+            filepath_get_up_time = "python_files/coolq_of_xiaozhang/database/get_up_time.txt"
+            time_in_txt = get_time_tag(filepath_time_tag)
             if time_in_txt != str(time.date()):
-                write_time_tag() 
-                write_get_up_time()
+                write_time_tag(filepath_time_tag) 
+                write_get_up_time(filepath_get_up_time)
+                await bot.send_private_msg(user_id=1027380683, message='今日起床时间查收')
+    if name == '小张':
+        time = datetime.datetime.now()
+        if time.hour >6 and time.hour < 15:
+            filepath_time_tag = "python_files/coolq_of_xiaozhang/database/date_of_xiaozhang.txt"
+            filepath_get_up_time = "python_files/coolq_of_xiaozhang/database/get_up_time_of_xiaozhang.txt"
+            time_in_txt = get_time_tag(filepath_time_tag)
+            if time_in_txt != str(time.date()):
+                write_time_tag(filepath_time_tag) 
+                write_get_up_time(filepath_get_up_time)
                 await bot.send_private_msg(user_id=1027380683, message='今日起床时间查收')
     # 通过封装的函数获取图灵机器人的回复
     reply = await call_tuling_api(session, message)
