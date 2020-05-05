@@ -67,7 +67,7 @@ async def tuling(session: CommandSession):
         # 如果调用失败，或者它返回的内容我们目前处理不了，发送无法获取图灵回复时的「表达」
         # 这里的 render_expression() 函数会将一个「表达」渲染成一个字符串消息
         # await session.send(render_expression(EXPR_DONT_UNDERSTAND))
-        num = random.randint(1,13)
+        num = random.randint(1,22)
         await session.send(MessageSegment.image(str(num)+'.jpg'))
 
 

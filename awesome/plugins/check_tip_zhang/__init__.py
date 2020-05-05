@@ -55,6 +55,7 @@ async def _():
         plot_morning_get_up()
         await bot.send_group_msg(group_id=1064439850,
                                 message=MessageSegment.image('%s.png' %str(now.date())))
+        await bot.send_private_msg(user_id=844814749,message='小王~你的起床统计来啦，饺子做的哦~')                       
         await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('%s.png' %str(now.date())) )
     except CQHttpError:
         pass
