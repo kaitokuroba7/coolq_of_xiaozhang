@@ -10,6 +10,7 @@ from aiocqhttp.exceptions import Error as CQHttpError
 from ..common_package.get_name import get_nickname
 from ..common_package.get_love_word import get_love_word
 from ..common_package.get_love_word import get_morning_word
+from ..common_package.get_love_word import get_evening_word
 from ..common_package.get_love_word import get_nick_name
 from nonebot import MessageSegment
 import random
@@ -96,6 +97,33 @@ async def _():
         trigger=trigger,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
         kwargs={'user_id':844814749, 'message':'早安啊~'+nick_name.strip()+'，'+morning_word.strip()+'~'},
+        misfire_grace_time=60,  # 允许的误差时间，建议不要省略
+        jobstore='default',  # 任务储存库，在下一小节中说明
+    )
+
+@nonebot.scheduler.scheduled_job('cron', hour=0, minute=4)
+async def _():
+    """ 晚安功能 """
+    delta = datetime.timedelta(minutes= random.randint(1, 30))
+    # delta = datetime.timedelta(minutes=1)
+    trigger = DateTrigger(
+        run_date=datetime.datetime.now() + delta 
+    )
+    bot = nonebot.get_bot()
+    nick_name = get_nick_name()
+    evening_word = get_evening_word()
+    try:
+        await bot.send_private_msg(user_id=1027380683, message='晚安任务在%s发送' %str(trigger))
+
+    except CQHttpError:
+        pass
+    bot = nonebot.get_bot()
+    # 添加任务
+    scheduler.add_job(
+        func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
+        trigger=trigger,  # 触发器
+        # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
+        kwargs={'user_id':844814749, 'message':'晚安啊~'+nick_name.strip()+'，'+evening_word.strip()+'~'},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )

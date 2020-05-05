@@ -5,7 +5,7 @@ PORT = 8080
 
 SUPERUSERS = {1027380683, 844814749}
 COMMAND_START = {'', '/', '!', '／', '！'}
-NICKNAME = {'饺子', '饺饺'}
+NICKNAME = {'饺子', '饺饺', ''}
 
 TULING_API_KEY = ['b43ce0bbd7b842c0801130d809c0d571',
                   '5a0f2123404a4953b17f278334388557',

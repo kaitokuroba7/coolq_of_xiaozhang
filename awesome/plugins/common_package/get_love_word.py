@@ -16,6 +16,17 @@ def get_love_word() -> str:
         obj_file.write(content)
     return love_word
 
+
+def remove_get_up_time(filepath):
+    """ 输入文件路径,删除第一条信息 """
+    # filepath = "python_files/coolq_of_xiaozhang/database/lover's prattle.txt"
+    with open(filepath) as obj_file:
+        lines = obj_file.readlines()
+        lines.pop(0)
+        content = ''.join(lines)
+    with open(filepath, 'w') as obj_file:
+        obj_file.write(content)
+
 def get_nick_name() -> str:
     """ 获取提醒昵称 """
     filepath_nickname = "python_files/coolq_of_xiaozhang/database/nick_name.txt"
@@ -34,3 +45,12 @@ def get_morning_word() -> str:
         count_word = randint(0, len(lines)-1)
         morning_word = lines[count_word]   
     return morning_word   
+
+def get_evening_word() -> str:
+    """ 从晚安语录中抽出一条，获得早安提醒 """
+    filepath_words = "python_files/coolq_of_xiaozhang/database/evening_words.txt"
+    with open(filepath_words) as obj_file:
+        lines = obj_file.readlines()  # 形成一个列表
+        count_word = randint(0, len(lines)-1)
+        evening_word = lines[count_word]   
+    return evening_word  

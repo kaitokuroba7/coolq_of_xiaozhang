@@ -32,16 +32,16 @@ async def _():
 
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=15, minute=35)
+@nonebot.scheduler.scheduled_job('cron', hour=15, minute=48)
 async def _():
     """ 临时任务 """
     bot = nonebot.get_bot()
     now = datetime.datetime.now()
-    if str(now.date()) == '2020-05-03':
+    if str(now.date()) == '2020-05-04':
         try:                                      
             # await bot.send_group_msg(group_id=1064439850, message='小王~'+word.rstrip())                      
             # await bot.send_private_msg(user_id=844814749, message='饺子P的照片~')
-            await bot.send_private_msg(user_id=1027380683, message=MessageSegment.image('2020-05-03.png'))
+            await bot.send_private_msg(user_id=1027380683, message='你好'+MessageSegment.image('1.jpg'))
         except CQHttpError:
             pass
 
@@ -55,7 +55,7 @@ async def _():
         plot_morning_get_up()
         await bot.send_group_msg(group_id=1064439850,
                                 message=MessageSegment.image('%s.png' %str(now.date())))
-        await bot.send_private_msg(user_id=844814749,message='小王~你的起床统计来啦，饺子做的哦~')                       
+        await bot.send_private_msg(user_id=844814749,message='小王~你的起床时间统计来啦，饺子做的哦~')                       
         await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('%s.png' %str(now.date())) )
     except CQHttpError:
         pass
@@ -130,11 +130,16 @@ async def _():
 async def _():
     """ 小王的天气提醒 """
     bot = nonebot.get_bot()
-    weather_rep = await get_weather_of_city('奉化')
+    weather_rep = await get_weather_of_city('江北')
     try:
-        await bot.send_group_msg(group_id=1064439850,
-                                 message=MessageSegment.at(844814749) + ' 早上好，饺子来预报天气啦！')
-        await bot.send_group_msg(group_id=1064439850,
+        #await bot.send_group_msg(group_id=1064439850,
+                             #    message=MessageSegment.at(844814749) + ' 早上好，饺子来预报天气啦！')
+        #await bot.send_group_msg(group_id=1064439850,
+                                # message='小王，' + weather_rep + '小王，饺子爱你噢！')
+
+        await bot.send_private_msg(user_id=844814749,
+                                 message=' 早上好，饺子来预报天气啦！')
+        await bot.send_private_msg(user_id=844814749,
                                  message='小王，' + weather_rep + '小王，饺子爱你噢！')
     except CQHttpError:
         pass
@@ -144,7 +149,7 @@ async def _():
 async def _():
     """ 小张的天气提醒 """
     bot = nonebot.get_bot()
-    weather_rep = await get_weather_of_city('舟山')
+    weather_rep = await get_weather_of_city('宁波')
     try:
         await bot.send_group_msg(group_id=1064439850,
                                  message=MessageSegment.at(1027380683) + ' 早上好，饺子来预报天气啦！')

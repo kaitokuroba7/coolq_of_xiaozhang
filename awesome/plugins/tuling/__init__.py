@@ -44,7 +44,7 @@ async def tuling(session: CommandSession):
             if time_in_txt != str(time.date()):
                 write_time_tag(filepath_time_tag) 
                 write_get_up_time(filepath_get_up_time)
-                await bot.send_private_msg(user_id=1027380683, message='今日起床时间查收')
+                await bot.send_private_msg(user_id=844814749, message='小王，饺子收到你的起床时间啦~')
     if name == '小张':
         time = datetime.datetime.now()
         if time.hour >6 and time.hour < 15:
@@ -54,7 +54,7 @@ async def tuling(session: CommandSession):
             if time_in_txt != str(time.date()):
                 write_time_tag(filepath_time_tag) 
                 write_get_up_time(filepath_get_up_time)
-                await bot.send_private_msg(user_id=1027380683, message='今日起床时间查收')
+                await bot.send_private_msg(user_id=1027380683, message='小张，今日起床时间已经查收')
     # 通过封装的函数获取图灵机器人的回复
     reply = await call_tuling_api(session, message)
     # if "请" in reply:

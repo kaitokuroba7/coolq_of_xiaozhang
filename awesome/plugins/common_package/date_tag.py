@@ -23,5 +23,5 @@ def write_get_up_time(filepath: str) -> str:
     # filepath = "python_files/coolq_of_xiaozhang/database/get_up_time.txt"
     with open(filepath,'a') as obj_file:
         day = datetime.datetime.now()
-        obj_file.write(str(day.month)+' '+str(day.day)+' '+str(day.hour)+' '+str(day.minute)+'\n')
+        obj_file.write('\n'+str(day.month)+' '+str(day.day)+' '+str(day.hour)+' '+str(day.minute))
 
