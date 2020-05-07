@@ -1,12 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime
+from .get_love_word import remove_get_up_time
 
 
 def plot_morning_get_up():
 
     filepath = "python_files/coolq_of_xiaozhang/database/get_up_time.txt"
     filepath_of_xiaozhang = "python_files/coolq_of_xiaozhang/database/get_up_time_of_xiaozhang.txt"
+    remove_get_up_time(filepath)
+    remove_get_up_time(filepath_of_xiaozhang)
     with open(filepath) as obj_file:
         contents = obj_file.readlines()
         y_axis_wang = []
@@ -14,6 +17,8 @@ def plot_morning_get_up():
         y_axis_label = []
         for i in range(len(contents)):
             content = contents[i].split()
+            if int(content[3]) < 10:
+                content[3] = '0'+content[3]
             y_axis_wang.append(int(content[2] + content[3]))
             y_axis_label.append(str(content[2] + ':' + content[3]))
             x_axis.append(str(content[0] + '-' + content[1]))
@@ -23,6 +28,8 @@ def plot_morning_get_up():
         y_axis_label_zhang = []
         for i in range(len(contents)):
             content = contents[i].split()
+            if int(content[3]) < 10:
+                content[3] = '0'+content[3]
             y_axis_zhang.append(int(content[2] + content[3]))
             y_axis_label_zhang.append(str(content[2] + ':' + content[3]))
     # 画图

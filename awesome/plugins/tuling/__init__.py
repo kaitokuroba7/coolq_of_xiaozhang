@@ -46,6 +46,7 @@ async def tuling(session: CommandSession):
                 write_get_up_time(filepath_get_up_time)
                 await bot.send_private_msg(user_id=844814749, message='小王，饺子收到你的起床时间啦~')
     if name == '小张':
+        await bot.send_private_msg(user_id=844814749, message='小张的消息：'+message)
         time = datetime.datetime.now()
         if time.hour >6 and time.hour < 15:
             filepath_time_tag = "python_files/coolq_of_xiaozhang/database/date_of_xiaozhang.txt"

@@ -10,6 +10,7 @@ from ..weather.data_source import get_weather_of_city
 from ..common_package.get_current_task import get_current_task
 from ..common_package.get_love_word import get_love_word
 from ..common_package.morning_report import plot_morning_get_up
+from ..common_package.get_love_word import remove_get_up_time
 import datetime
 """
 这个模块里有每日的打卡提醒、天气提醒、制定计划提醒、睡觉的提醒
@@ -17,14 +18,15 @@ import datetime
 """
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=17, minute=30)
+@nonebot.scheduler.scheduled_job('cron', hour=16, minute=10)
 async def _():
     """ 傍晚的情话 """
     bot = nonebot.get_bot()
     word = get_love_word()
     try: 
         await bot.send_group_msg(group_id=1064439850, message=MessageSegment.at(844814749))                                     
-        await bot.send_group_msg(group_id=1064439850, message='小王~'+word.rstrip())                      
+        await bot.send_group_msg(group_id=1064439850, message='小王~'+word.rstrip()) 
+        await bot.send_private_msg(user_id=844814749, message='小王~'+word.rstrip())                     
         # await bot.send_private_msg(user_id=844814749, message='饺子P的照片~')
         # await bot.send_private_msg(user_id=1027380683, message=MessageSegment.image('2020-05-03.png'))
     except CQHttpError:
@@ -32,16 +34,20 @@ async def _():
 
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=15, minute=48)
+@nonebot.scheduler.scheduled_job('cron', hour=21, minute=35)
 async def _():
     """ 临时任务 """
     bot = nonebot.get_bot()
     now = datetime.datetime.now()
-    if str(now.date()) == '2020-05-04':
-        try:                                      
-            # await bot.send_group_msg(group_id=1064439850, message='小王~'+word.rstrip())                      
-            # await bot.send_private_msg(user_id=844814749, message='饺子P的照片~')
-            await bot.send_private_msg(user_id=1027380683, message='你好'+MessageSegment.image('1.jpg'))
+    if str(now.date()) == '2020-05-06':
+        try:
+            # plot_morning_get_up()
+            filepath_get_up_time = "python_files/coolq_of_xiaozhang/database/get_up_time_of_xiaozhang.txt"
+            remove_get_up_time(filepath_get_up_time)
+            #await bot.send_group_msg(group_id=1064439850,
+                                    #message=MessageSegment.image('%s.png' %str(now.date())))
+            await bot.send_private_msg(user_id=844814749,message='小王~快看~饺子给你做的图~')                       
+            await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('wanan.jpg'))
         except CQHttpError:
             pass
 
@@ -126,7 +132,7 @@ async def _():
         pass
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=7, minute=5)
+@nonebot.scheduler.scheduled_job('cron', hour=7, minute=45)
 async def _():
     """ 小王的天气提醒 """
     bot = nonebot.get_bot()
