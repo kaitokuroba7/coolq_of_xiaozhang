@@ -22,13 +22,18 @@ async def _():
     """ 在随机时间增加饺子的悄悄话 """
     delta = datetime.timedelta(hours=random.randint(1,3), minutes= random.randint(1, 58))
     # delta = datetime.timedelta(minutes=1)
+    delta_tian = datetime.timedelta(hours=random.randint(1,2), minutes= random.randint(1, 58))
+    # delta_tian = datetime.timedelta(minutes=1)
     trigger = DateTrigger(
         run_date=datetime.datetime.now() + delta 
+    )
+    trigger_tian = DateTrigger(
+        run_date=datetime.datetime.now() + delta_tian 
     )
     bot = nonebot.get_bot()
     try:
         await bot.send_private_msg(user_id=1027380683, message='饺子的情话任务在%s发送' %str(trigger))
-
+        await bot.send_private_msg(user_id=1027380683, message='饺子的可爱图片在%s发送' %str(trigger_tian))
     except CQHttpError:
         pass
     """ 获取情话 """
@@ -43,20 +48,33 @@ async def _():
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
+    """ 增加随机的可爱图片 """
+    scheduler.add_job(
+        func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
+        trigger=trigger_tian,  # 触发器
+        # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
+        kwargs={'user_id':844814749, 'message':MessageSegment.image('cute'+str(random.randint(1,16))+'.jpg')},
+        misfire_grace_time=60,  # 允许的误差时间，建议不要省略
+        jobstore='default',  # 任务储存库，在下一小节中说明
+    )
 
 
 @nonebot.scheduler.scheduled_job('cron', hour=18, minute=45)
 async def _():
     """ 在随机时间增加情话 """
-    delta = datetime.timedelta(hours=random.randint(1,5), minutes= random.randint(1, 15))
+    delta = datetime.timedelta(hours=random.randint(3,5), minutes= random.randint(1, 15))
     # delta = datetime.timedelta(minutes=1)
+    delta_tian = datetime.timedelta(hours=random.randint(1,2), minutes= random.randint(1, 58))
     trigger = DateTrigger(
         run_date=datetime.datetime.now() + delta 
+    )
+    trigger_tian = DateTrigger(
+        run_date=datetime.datetime.now() + delta_tian 
     )
     bot = nonebot.get_bot()
     try:
         await bot.send_private_msg(user_id=1027380683, message='来自小张的情话任务在%s发送' %str(trigger))
-
+        await bot.send_private_msg(user_id=1027380683, message='饺子的可爱图片在%s发送' %str(trigger_tian))
     except CQHttpError:
         pass
     """ 获取情话 """
@@ -71,6 +89,16 @@ async def _():
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
+    """ 增加随机的可爱图片 """
+    scheduler.add_job(
+        func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
+        trigger=trigger_tian,  # 触发器
+        # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
+        kwargs={'user_id':844814749, 'message':MessageSegment.image('cute'+str(random.randint(1,16))+'.jpg')},
+        misfire_grace_time=60,  # 允许的误差时间，建议不要省略
+        jobstore='default',  # 任务储存库，在下一小节中说明
+    )
+
 
 
 
@@ -101,6 +129,17 @@ async def _():
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
 
+    """ 增加随机的早安图片 """
+    scheduler.add_job(
+        func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
+        trigger=trigger,  # 触发器
+        # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
+        kwargs={'user_id':844814749, 'message':MessageSegment.image('zaoan'+str(random.randint(1,6))+'.jpg')},
+        misfire_grace_time=60,  # 允许的误差时间，建议不要省略
+        jobstore='default',  # 任务储存库，在下一小节中说明
+    )
+
+
 @nonebot.scheduler.scheduled_job('cron', hour=0, minute=1)
 async def _():
     """ 晚安功能 """
@@ -124,6 +163,16 @@ async def _():
         trigger=trigger,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
         kwargs={'user_id':844814749, 'message':'晚安啊~'+nick_name.strip()+'，'+evening_word.strip()+'~'},
+        misfire_grace_time=60,  # 允许的误差时间，建议不要省略
+        jobstore='default',  # 任务储存库，在下一小节中说明
+    )
+
+    """ 增加随机的晚安图片 """
+    scheduler.add_job(
+        func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
+        trigger=trigger,  # 触发器
+        # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
+        kwargs={'user_id':844814749, 'message':MessageSegment.image('wanan'+str(random.randint(1,11))+'.jpg')},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
