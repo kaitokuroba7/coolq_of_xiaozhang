@@ -1,6 +1,7 @@
 from nonebot import MessageSegment
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
+from ..common_package.config import QQ_ID
 
 """ 图书馆打卡模块，包含了签到打卡 ，签退打卡 """
 
@@ -10,12 +11,12 @@ async def sign_in_9_20():
     """ 在9：20分发布签到任务 """
     bot = nonebot.get_bot()
     try:
-        await bot.send_group_msg(group_id=1064439850,
-                                message=MessageSegment.at(1027380683)+'大笨蛋同学，签到打卡了！')
-        await bot.send_group_msg(group_id=1064439850,
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                message=MessageSegment.at(QQ_ID.xiaozhang())+'大笨蛋同学，签到打卡了！')
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                 message=MessageSegment.image('tushuguan.jpg'))
-        await bot.send_private_msg(user_id=844814749,message='小王~帮饺子个忙，提醒一下小张打卡哦~')                       
-        # await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('wanan.jpg'))
+        await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message='小王~帮饺子个忙，3分钟后提醒一下小张打卡哦~')                       
+        # await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message=MessageSegment.image('wanan.jpg'))
     except CQHttpError:
         pass
 
@@ -27,12 +28,12 @@ async def sign_out_15_50():
     """ 在15：50发布签退任务 """
     bot = nonebot.get_bot()
     try:
-        await bot.send_group_msg(group_id=1064439850,
-                                message=MessageSegment.at(1027380683)+'大笨蛋同学，签退打卡了！')
-        await bot.send_group_msg(group_id=1064439850,
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                message=MessageSegment.at(QQ_ID.xiaozhang())+'大笨蛋同学，签退打卡了！')
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                 message=MessageSegment.image('tushuguan.jpg'))
-        # await bot.send_private_msg(user_id=844814749,message='小王~提醒一下小张打卡哦~')                       
-        # await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('wanan.jpg'))
+        await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message='小王~帮饺子一下，3分钟后提醒一下小张打卡哦~')                       
+        # await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message=MessageSegment.image('wanan.jpg'))
     except CQHttpError:
         pass
 
@@ -42,12 +43,12 @@ async def sign_in_17_10():
     """ 在17：10分发布签到任务 """
     bot = nonebot.get_bot()
     try:
-        await bot.send_group_msg(group_id=1064439850,
-                                message=MessageSegment.at(1027380683)+'大笨蛋同学，签到打卡了！')
-        await bot.send_group_msg(group_id=1064439850,
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                message=MessageSegment.at(QQ_ID.xiaozhang())+'大笨蛋同学，签到打卡了！')
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                 message=MessageSegment.image('tushuguan.jpg'))
-        # await bot.send_private_msg(user_id=844814749,message='小王~提醒一下小张打卡哦~')                       
-        # await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('wanan.jpg'))
+        await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message='小王~帮饺子一下，3分钟后提醒一下小张打卡哦~')                       
+        # await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message=MessageSegment.image('wanan.jpg'))
     except CQHttpError:
         pass
 
@@ -57,12 +58,12 @@ async def sign_out_19_40():
     """ 在19：40分发布签退任务 """
     bot = nonebot.get_bot()
     try:
-        await bot.send_group_msg(group_id=1064439850,
-                                message=MessageSegment.at(1027380683)+'大笨蛋同学，签退打卡了！')
-        await bot.send_group_msg(group_id=1064439850,
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                message=MessageSegment.at(QQ_ID.xiaozhang())+'大笨蛋同学，签退打卡了！')
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                 message=MessageSegment.image('tushuguan.jpg'))
-        await bot.send_private_msg(user_id=844814749,message='小王~提醒一下小张打卡哦~')                       
-        # await bot.send_private_msg(user_id=844814749,message=MessageSegment.image('wanan.jpg'))
+        # await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message='小王~提醒一下小张打卡哦~')                       
+        # await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message=MessageSegment.image('wanan.jpg'))
     except CQHttpError:
         pass
 

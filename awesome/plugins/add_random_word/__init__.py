@@ -85,7 +85,7 @@ async def _():
         func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
         trigger=trigger,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
-        kwargs={'user_id':844814749, 'message':'小王~'+word.strip()+' ~~饺子抄送~~'},
+        kwargs={'user_id':844814749, 'message':'来自小张：小王~'+word.strip()+' ~~饺子抄送~~'},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )

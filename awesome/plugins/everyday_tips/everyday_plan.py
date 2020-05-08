@@ -2,6 +2,7 @@ from nonebot import MessageSegment
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
 from ..common_package.get_current_task import get_current_task
+from ..common_package.config import QQ_ID
 
 """ 每日计划模块，包含提醒制定计划，每日对计划完成情况的统计 """
 
@@ -15,17 +16,17 @@ async def xiaozhang_plan_finish_situation():
         n_name = '小张'
         current_task = await get_current_task(n_name)
         if not current_task:
-            await bot.send_group_msg(group_id=1064439850,
-                                     message=MessageSegment.at(1027380683) + '小张今天的任务都做完啦！饺子夸你哦！')
+            await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                     message=MessageSegment.at(QQ_ID.xiaozhang()) + '小张今天的任务都做完啦！饺子夸你哦！')
         if current_task:
-            await bot.send_group_msg(group_id=1064439850,
-                                     message=MessageSegment.at(1027380683) + '小张今天还没完成的任务')
+            await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                     message=MessageSegment.at(QQ_ID.xiaozhang()) + '小张今天还没完成的任务')
 
             for i in range(len(current_task)):
-                await bot.send_group_msg(group_id=1064439850,
+                await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                          message=str(i + 1) + ' ' + current_task[i])
 
-            await bot.send_group_msg(group_id=1064439850,
+            await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                      message='撸起袖子加油干！')
 
     except CQHttpError:
@@ -41,17 +42,17 @@ async def xiaowang_plan_finish_situation():
         n_name = '小王'
         current_task = await get_current_task(n_name)
         if not current_task:
-            await bot.send_group_msg(group_id=1064439850,
-                                     message=MessageSegment.at(844814749) + '小王今天的任务都做完啦！饺子夸你哦！')
+            await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                     message=MessageSegment.at(QQ_ID.xiaowang()) + '小王今天的任务都做完啦！饺子夸你哦！')
         if current_task:
-            await bot.send_group_msg(group_id=1064439850,
-                                     message=MessageSegment.at(844814749) + '小王今天还没完成的任务')
+            await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                     message=MessageSegment.at(QQ_ID.xiaowang()) + '小王今天还没完成的任务')
 
             for i in range(len(current_task)):
-                await bot.send_group_msg(group_id=1064439850,
+                await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                          message=str(i + 1) + ' ' + current_task[i])
 
-            await bot.send_group_msg(group_id=1064439850,
+            await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                      message='小王，撸起袖子加油干！')
 
     except CQHttpError:
@@ -64,8 +65,8 @@ async def everyday_new_plan():
     """ 提醒任务制定 """
     bot = nonebot.get_bot()
     try:
-        await bot.send_group_msg(group_id=1064439850,
-                                 message=MessageSegment.at(844814749) + MessageSegment.at(1027380683)
+        await bot.send_group_msg(group_id=QQ_ID.our_group(),
+                                 message=MessageSegment.at(QQ_ID.xiaowang()) + MessageSegment.at(QQ_ID.xiaozhang())
                                  + ' 新的一天，把今天的任务告诉饺子吧！')
     except CQHttpError:
         pass
