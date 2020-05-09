@@ -12,6 +12,7 @@ from ..common_package.get_love_word import get_love_word
 from ..common_package.get_love_word import get_morning_word
 from ..common_package.get_love_word import get_evening_word
 from ..common_package.get_love_word import get_nick_name
+from ..common_package.get_picture import get_pic_of_iamge
 from nonebot import MessageSegment
 import random
 import nonebot
@@ -49,11 +50,12 @@ async def _():
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
     """ 增加随机的可爱图片 """
+    pic_name = get_pic_of_iamge(keyword=r'^cute')
     scheduler.add_job(
         func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
         trigger=trigger_tian,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
-        kwargs={'user_id':844814749, 'message':MessageSegment.image('cute'+str(random.randint(1,16))+'.jpg')},
+        kwargs={'user_id':844814749, 'message':MessageSegment.image(pic_name)},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
@@ -90,11 +92,12 @@ async def _():
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
     """ 增加随机的可爱图片 """
+    pic_name = get_pic_of_iamge(keyword=r'^cute')
     scheduler.add_job(
         func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
         trigger=trigger_tian,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
-        kwargs={'user_id':844814749, 'message':MessageSegment.image('cute'+str(random.randint(1,16))+'.jpg')},
+        kwargs={'user_id':844814749, 'message':MessageSegment.image(pic_name)},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
@@ -130,11 +133,12 @@ async def _():
     )
 
     """ 增加随机的早安图片 """
+    pic_name = get_pic_of_iamge(keyword=r'^zaoan')
     scheduler.add_job(
         func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
         trigger=trigger,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
-        kwargs={'user_id':844814749, 'message':MessageSegment.image('zaoan'+str(random.randint(1,6))+'.jpg')},
+        kwargs={'user_id':844814749, 'message':MessageSegment.image(pic_name)},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
@@ -168,11 +172,12 @@ async def _():
     )
 
     """ 增加随机的晚安图片 """
+    pic_name = get_pic_of_iamge(keyword=r'^wanan')
     scheduler.add_job(
         func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
         trigger=trigger,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
-        kwargs={'user_id':844814749, 'message':MessageSegment.image('wanan'+str(random.randint(1,11))+'.jpg')},
+        kwargs={'user_id':844814749, 'message':MessageSegment.image(pic_name)},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )

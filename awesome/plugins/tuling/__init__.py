@@ -16,6 +16,7 @@ from ..common_package.get_name import get_nickname
 from ..common_package.date_tag import get_time_tag
 from ..common_package.date_tag import write_time_tag
 from ..common_package.date_tag import write_get_up_time
+from ..common_package.get_picture import get_pic_of_iamge
 import datetime
 
 # 定义无法获取图灵回复时的「表达（Expression）」
@@ -46,16 +47,18 @@ async def tuling(session: CommandSession):
                 write_get_up_time(filepath_get_up_time)
                 await bot.send_private_msg(user_id=844814749, message='小王，饺子收到你的起床时间啦~')
     if name == '小张':
-        await bot.send_private_msg(user_id=844814749, message='小张的消息：'+message)
-        time = datetime.datetime.now()
-        if time.hour >6 and time.hour < 15:
-            filepath_time_tag = "python_files/coolq_of_xiaozhang/database/date_of_xiaozhang.txt"
-            filepath_get_up_time = "python_files/coolq_of_xiaozhang/database/get_up_time_of_xiaozhang.txt"
-            time_in_txt = get_time_tag(filepath_time_tag)
-            if time_in_txt != str(time.date()):
-                write_time_tag(filepath_time_tag) 
-                write_get_up_time(filepath_get_up_time)
-                await bot.send_private_msg(user_id=1027380683, message='小张，今日起床时间已经查收')
+        list_message = message.split()
+        if '。' in list_message[0]:
+            await bot.send_private_msg(user_id=844814749, message='小张的消息：'+message)
+            time = datetime.datetime.now()
+            if time.hour >6 and time.hour < 15:
+                filepath_time_tag = "python_files/coolq_of_xiaozhang/database/date_of_xiaozhang.txt"
+                filepath_get_up_time = "python_files/coolq_of_xiaozhang/database/get_up_time_of_xiaozhang.txt"
+                time_in_txt = get_time_tag(filepath_time_tag)
+                if time_in_txt != str(time.date()):
+                    write_time_tag(filepath_time_tag) 
+                    write_get_up_time(filepath_get_up_time)
+                    await bot.send_private_msg(user_id=1027380683, message='小张，今日起床时间已经查收')
     # 通过封装的函数获取图灵机器人的回复
     reply = await call_tuling_api(session, message)
     # if "请" in reply:
@@ -68,8 +71,8 @@ async def tuling(session: CommandSession):
         # 如果调用失败，或者它返回的内容我们目前处理不了，发送无法获取图灵回复时的「表达」
         # 这里的 render_expression() 函数会将一个「表达」渲染成一个字符串消息
         # await session.send(render_expression(EXPR_DONT_UNDERSTAND))
-        num = random.randint(1,22)
-        await session.send(MessageSegment.image(str(num)+'.jpg'))
+        pic_name = get_pic_of_iamge()
+        await session.send(MessageSegment.image(pic_name))
 
 
 @on_natural_language
