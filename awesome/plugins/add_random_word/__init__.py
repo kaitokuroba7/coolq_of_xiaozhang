@@ -61,12 +61,12 @@ async def _():
     )
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=18, minute=45)
+@nonebot.scheduler.scheduled_job('cron', hour=20, minute=1)
 async def _():
     """ 在随机时间增加情话 """
-    delta = datetime.timedelta(hours=random.randint(3,5), minutes= random.randint(1, 15))
+    delta = datetime.timedelta(hours=random.randint(0,3), minutes= random.randint(1, 58))
     # delta = datetime.timedelta(minutes=1)
-    delta_tian = datetime.timedelta(hours=random.randint(1,2), minutes= random.randint(1, 58))
+    delta_tian = datetime.timedelta(hours=random.randint(0,2), minutes= random.randint(1, 58))
     trigger = DateTrigger(
         run_date=datetime.datetime.now() + delta 
     )

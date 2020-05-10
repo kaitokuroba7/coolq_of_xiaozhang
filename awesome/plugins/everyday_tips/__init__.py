@@ -29,6 +29,7 @@ async def _():
     # 每日的天气提醒
     await weather.weather_of_wang() # 小王的天气提醒
     await weather.weather_of_zhang() # 小张的天气提醒
+    await weather.weather_of_sun() # 小孙的天气提醒
 
     # 每日任务提醒
     await everyday_plan.everyday_new_plan()  # 制定新计划

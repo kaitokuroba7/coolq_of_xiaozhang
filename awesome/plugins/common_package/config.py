@@ -10,6 +10,11 @@ class QQ_ID():
     def xiaozhang() -> int:
         """ 小张的QQ号 """
         return 1027380683
+
+    @staticmethod
+    def xiaosun() -> int:
+        """ 小孙的QQ号 """
+        return 1015988662
     
     @staticmethod
     def our_group() -> int:

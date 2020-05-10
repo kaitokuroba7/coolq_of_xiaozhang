@@ -15,4 +15,6 @@ def get_nickname(session: CommandSession):
         n_name = '小张'
     elif usr_id == 844814749:
         n_name = '小王'
+    else:
+        n_name = 'other'
     return n_name
