@@ -8,21 +8,23 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from ..common_package.get_current_task import get_current_task
 from nonebot import MessageSegment
 from ..common_package.get_name import get_nickname
+from ..plan import get_task
 
 
 @on_command('打卡')
 async def check(session: CommandSession):
     n_name = get_nickname(session)
     current_task = await get_current_task(n_name)
+    arg = session.get('', prompt=n_name + '，你要打卡哪个任务呢')
 
     if not current_task:
         await session.send(MessageSegment.at(id) + n_name + '，你今天的任务都完成啦！饺子夸你哦！么么哒！')
     else:
         await session.send(MessageSegment.at(id) + n_name + '当前的计划列表是：')
         for i in range(len(current_task)):
-            await session.send(str(i + 1) + ' ' + current_task[i])
+            await session.send(str(i + 1) + ' ' + current_task[i].strip())
 
-        await get_check_command(session, n_name)
+        await get_check_command(session, n_name, arg)
 
 
 # on_natural_language 装饰器将函数声明为一个自然语言处理器
@@ -35,27 +37,22 @@ async def _():
 
 
 async def check_task(arg, n_name):
-    """" 打卡函数 """
-    if n_name == '小张':
-        filename = 'xiaozhang_task.txt'
-    elif n_name == '小王':
-        filename = 'xiaowang_task.txt'
-    with open(filename) as f_obj:
-        content = f_obj.read()
-        content = content.split()
-        if arg in content:
-            content.remove(arg)
-            with open(filename, 'w') as f_obj:
-                f_obj.write(' '.join(content))
-        else:
-            content = n_name + '，不要骗饺子哦，你根本没有这个计划！'
+    """ 打卡函数,若任务存在则删除,返回对应信息，不存在返回信息 """
+    tasks = await get_current_task(n_name) # 获取任务
+    if arg in tasks:
+        tasks.remove(arg)
+        await get_task(tasks, n_name)  # 把删除后的任务写入文件
+        content = n_name + '打卡“' + arg + '” 成功'
+    else:
+        content = n_name + '，不要骗饺子哦，你根本没有这个计划！'
+
     return content
-
-
-async def result_of_check(session: CommandSession, tasks, arg, n_name):
+        
+async def result_of_check(session: CommandSession, n_name):
+    tasks = await get_current_task(n_name)
     if type(tasks) == list:
         if tasks:
-            await session.send(n_name + '打卡“' + arg + '”成功，你还没有完成的计划是')
+            await session.send(n_name + '你当前的任务为:')
             for i in range(len(tasks)):
                 await session.send(str(i + 1) + ' ' + tasks[i])
         else:
@@ -64,8 +61,9 @@ async def result_of_check(session: CommandSession, tasks, arg, n_name):
         await session.send(tasks)
 
 
-async def get_check_command(session, n_name):
+async def get_check_command(session, n_name, arg):
     """ 获取任务并打卡 """
-    arg = session.get('', prompt=n_name + '，你要打卡哪个任务呢')
-    tasks = await check_task(arg, n_name)
-    await result_of_check(session, tasks, arg, n_name)
+    # arg = session.get('', prompt=n_name + '，你要打卡哪个任务呢')
+    content = await check_task(arg, n_name)
+    await session.send(content)  # 向用户发送信息
+    await result_of_check(session, n_name)

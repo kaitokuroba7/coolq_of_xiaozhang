@@ -11,6 +11,7 @@ from apscheduler.triggers.date import DateTrigger # 一次性触发器
 from nonebot import on_command, scheduler
 from ..common_package.get_name import get_nickname
 from nonebot import MessageSegment
+import nonebot
 
 
 @on_command('tip')
@@ -26,6 +27,7 @@ async def _(session: CommandSession):
     news_time = text_list[1] + ' 2020'
     # newsTime = '0404 15:50'
     GMT_FORMAT = '%m%d%H%M %Y'
+    bot = nonebot.get_bot()
 
     try:
         newsTime = datetime.datetime.strptime(news_time, GMT_FORMAT)
@@ -58,6 +60,16 @@ async def _(session: CommandSession):
             misfire_grace_time=60,  # 允许的误差时间，建议不要省略
             jobstore='default',  # 任务储存库，在下一小节中说明
         )
+
+        scheduler.add_job(
+            func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
+            trigger=trigger,  # 触发器
+            # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
+            kwargs={'user_id':usr_id, 'message':n_name + "，饺子提醒你去“" + text_list[0] + '”啦',},
+            misfire_grace_time=60,  # 允许的误差时间，建议不要省略
+            jobstore='default',  # 任务储存库，在下一小节中说明
+        )
+
     except ValueError:
         await session.send("日期匹配错误，重新唤醒一下饺子吧！")
 

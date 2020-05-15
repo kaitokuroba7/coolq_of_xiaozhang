@@ -18,12 +18,12 @@ import random
 import nonebot
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=12, minute=1)
+@nonebot.scheduler.scheduled_job('cron', hour=12, minute=5)
 async def _():
     """ 在随机时间增加饺子的悄悄话 """
-    delta = datetime.timedelta(hours=random.randint(1,3), minutes= random.randint(1, 58))
+    delta = datetime.timedelta(hours=random.randint(1,3), minutes= random.randint(1, 54))
     # delta = datetime.timedelta(minutes=1)
-    delta_tian = datetime.timedelta(hours=random.randint(1,2), minutes= random.randint(1, 58))
+    delta_tian = datetime.timedelta(hours=random.randint(1,2), minutes= random.randint(1, 54))
     # delta_tian = datetime.timedelta(minutes=1)
     trigger = DateTrigger(
         run_date=datetime.datetime.now() + delta 
