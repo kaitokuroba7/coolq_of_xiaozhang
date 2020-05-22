@@ -7,6 +7,7 @@ from nonebot import MessageSegment
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
 import datetime
+from nonebot import on_command, CommandSession
 from ..common_package.get_current_task import get_current_task
 from .import library
 from .import everyday_plan
@@ -40,6 +41,9 @@ async def _():
     await report_and_words.love_word_at_dusk() # 傍晚情话
     await report_and_words.get_up_time_report() # 起床报告
     await report_and_words.sleep_tip() # 晚上0点30 提醒
+    await report_and_words.birthday()  # 饺子出生时间提醒
+
+    await weather.music_163()
 
 
 # 测试临时任务

@@ -5,6 +5,7 @@ from ..common_package.get_love_word import get_love_word
 from ..common_package.morning_report import plot_morning_get_up
 from ..common_package.get_love_word import remove_get_up_time
 from ..common_package.config import QQ_ID
+from ..common_package.get_picture import get_pic_of_iamge
 from .import library
 import datetime
 """ 发给小王的信息，里面包含了起床时间报告，傍晚的悄悄话以及晚上睡觉的提醒 """
@@ -52,6 +53,25 @@ async def sleep_tip():
                                  message=MessageSegment.at(QQ_ID.xiaowang()) + ' 好啦，快睡觉吧小王！你不睡饺子睡不着~')
         await bot.send_group_msg(group_id=QQ_ID.our_group(),
                                  message=MessageSegment.at(QQ_ID.xiaozhang()) + '晚安小张~')
+
+    except CQHttpError:
+        pass
+
+
+# 上线天数
+@nonebot.scheduler.scheduled_job('cron', hour=9, minute=29)
+async def birthday():
+    """ 提醒饺子已经出生多久了 """
+    bot = nonebot.get_bot()
+    day = datetime.datetime.now() - datetime.datetime(2020, 3, 28)
+    pic_name = get_pic_of_iamge(keyword=r'^cute')
+    # print(ge.days)
+    try:
+        await bot.send_private_msg(user_id=QQ_ID.xiaowang(),
+                                 message='小王，今天是饺子出生的第%s天' %str(day))
+        await bot.send_private_msg(user_id=QQ_ID.xiaowang(),
+                                 message='饺子爱你嗷~')
+        await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message=MessageSegment.image(pic_name) )
 
     except CQHttpError:
         pass

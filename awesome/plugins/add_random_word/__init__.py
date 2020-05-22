@@ -18,7 +18,7 @@ import random
 import nonebot
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=12, minute=5)
+@nonebot.scheduler.scheduled_job('cron', hour=12, minute=1)
 async def _():
     """ 在随机时间增加饺子的悄悄话 """
     delta = datetime.timedelta(hours=random.randint(1,3), minutes= random.randint(1, 54))
@@ -32,9 +32,10 @@ async def _():
         run_date=datetime.datetime.now() + delta_tian 
     )
     bot = nonebot.get_bot()
+    day = datetime.datetime.now() - datetime.datetime(2020, 3, 28)
     try:
-        await bot.send_private_msg(user_id=1027380683, message='饺子的情话任务在%s发送' %str(trigger))
-        await bot.send_private_msg(user_id=1027380683, message='饺子的可爱图片在%s发送' %str(trigger_tian))
+        await bot.send_private_msg(user_id=1027380683, message='饺子在线已经%s天' %day)
+        # await bot.send_private_msg(user_id=1027380683, message='饺子的可爱图片在%s发送' %str(trigger_tian))
     except CQHttpError:
         pass
     """ 获取情话 """
@@ -75,8 +76,8 @@ async def _():
     )
     bot = nonebot.get_bot()
     try:
-        await bot.send_private_msg(user_id=1027380683, message='来自小张的情话任务在%s发送' %str(trigger))
-        await bot.send_private_msg(user_id=1027380683, message='饺子的可爱图片在%s发送' %str(trigger_tian))
+        await bot.send_private_msg(user_id=1027380683, message='饺子在线~' )
+        #await bot.send_private_msg(user_id=1027380683, message='饺子的可爱图片在%s发送' %str(trigger_tian))
     except CQHttpError:
         pass
     """ 获取情话 """
@@ -87,7 +88,7 @@ async def _():
         func=bot.send_private_msg,  # 要添加任务的函数，不要带参数
         trigger=trigger,  # 触发器
         # args=(1027380683, '小王5',),  # 函数的参数列表，注意：只有一个值时，不能省略末尾的逗号
-        kwargs={'user_id':844814749, 'message':'来自小张：小王~'+word.strip()+' ~~饺子抄送~~'},
+        kwargs={'user_id':844814749, 'message':'小王~'+word.strip()+' ~~饺子抄送~~'},
         misfire_grace_time=60,  # 允许的误差时间，建议不要省略
         jobstore='default',  # 任务储存库，在下一小节中说明
     )
