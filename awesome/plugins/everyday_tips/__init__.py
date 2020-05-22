@@ -1,8 +1,3 @@
-#  _*_ coding:utf-8 _*_
-# 程序员：10273
-# 开发日期 ：  12:46
-# 文件名 ： check_tip.py
-# 开发工具： PyCharm
 from nonebot import MessageSegment
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
