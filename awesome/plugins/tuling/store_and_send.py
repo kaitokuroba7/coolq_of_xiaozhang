@@ -8,9 +8,10 @@ async def store_and_send_message(name: str, message: str):
     """ 消息转达以及早起时间记录 """
     bot = nonebot.get_bot()
     if name == '小王':
-        await bot.send_private_msg(user_id=1027380683, message='小王的消息：'+message)
+        if '~' in message.strip():
+            await bot.send_private_msg(user_id=1027380683, message='小王的消息：'+message)
         time = datetime.datetime.now()
-        if time.hour >6 and time.hour < 13:
+        if time.hour >6 and time.hour < 22 :
             filepath_time_tag = "python_files/coolq_of_xiaozhang/database/date.txt"
             filepath_get_up_time = "python_files/coolq_of_xiaozhang/database/get_up_time.txt"
             time_in_txt = get_time_tag(filepath_time_tag)

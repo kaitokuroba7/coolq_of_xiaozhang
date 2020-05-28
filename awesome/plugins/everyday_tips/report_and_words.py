@@ -59,18 +59,21 @@ async def sleep_tip():
 
 
 # 上线天数
-@nonebot.scheduler.scheduled_job('cron', hour=9, minute=29)
+@nonebot.scheduler.scheduled_job('cron', hour=9, minute=15)
 async def birthday():
     """ 提醒饺子已经出生多久了 """
     bot = nonebot.get_bot()
     day = datetime.datetime.now() - datetime.datetime(2020, 3, 28)
+    day_death = datetime.datetime(2020, 10, 31) - datetime.datetime.now()
     pic_name = get_pic_of_iamge(keyword=r'^cute')
     # print(ge.days)
     try:
         await bot.send_private_msg(user_id=QQ_ID.xiaowang(),
-                                 message='小王，今天是饺子出生的第%s天' %str(day))
+                                 message='小王，今天是饺子出生的第%s天' %str(day.days))
         await bot.send_private_msg(user_id=QQ_ID.xiaowang(),
-                                 message='饺子爱你嗷~')
+                                 message='小王，今天距离饺子停机还有%s天' %str(day_death.days)) 
+        await bot.send_private_msg(user_id=QQ_ID.xiaowang(),
+                                 message='饺子爱你嗷~嗷呜嗷呜~')
         await bot.send_private_msg(user_id=QQ_ID.xiaowang(),message=MessageSegment.image(pic_name) )
 
     except CQHttpError:

@@ -16,7 +16,7 @@ from ..common_package.get_name import get_nickname
 
 __plugin_name__ = '点歌'
 
-QQ_MUSIC_SEARCH_URL_FORMAT = 'http://music.eleuu.com/search?keywords={''}&format'
+QQ_MUSIC_SEARCH_URL_FORMAT = 'https://music.jeeas.cn/v1/search?s={''}&format=&from=music'
 
 
 @cached(ttl=12 * 60 * 60)
@@ -31,17 +31,17 @@ async def search_song_id(keyword: str, session: CommandSession) -> Optional[int]
         return None
 
     try:
-        if payload['result']['songs'][0]['artists'][0]['id'] == 1046043:
+        if payload['result']['songs'][0]['ar'][0]['id'] == 1046043:
             await session.send(MessageSegment.at(844814749) + ' 开心，饺子搜到了最爱的女友的歌！')
             i = random.randint(0, 29)
             return payload['result']['songs'][i]['id']
 
         for i in range(30):
-            if payload['result']['songs'][i]['artists'][0]['id'] == 1046043:
+            if payload['result']['songs'][i]['ar'][0]['id'] == 1046043:
                 await session.send(MessageSegment.at(844814749) + MessageSegment.face(21)
                                    + ' 开心，饺子搜到了最爱的女友的歌！')
                 return payload['result']['songs'][i]['id']
-            elif payload['result']['songs'][i]['artists'][0]['id'] == 1180155:
+            elif payload['result']['songs'][i]['ar'][0]['id'] == 1180155:
                 await session.send(MessageSegment.at(844814749) + MessageSegment.face(13)
                                    + ' 饺子知道了，'
                                    '是捕梦网的歌，中国第四大运营商')

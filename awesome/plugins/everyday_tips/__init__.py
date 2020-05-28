@@ -17,10 +17,10 @@ from .import report_and_words
 async def _():
     """ 初始化模块的任务 """
     # 图书馆签到签退
-    await library.sign_in_9_20()
-    await library.sign_out_15_50()
-    await library.sign_in_17_10()
-    await library.sign_out_19_40()
+    # await library.sign_in_9_20()
+    # await library.sign_out_15_50()
+    # await library.sign_in_17_10()
+    # await library.sign_out_19_40()
 
     # 每日的天气提醒
     await weather.weather_of_wang() # 小王的天气提醒
@@ -33,7 +33,7 @@ async def _():
     await everyday_plan.xiaozhang_plan_finish_situation()
 
     # 起床报告与傍晚情话
-    await report_and_words.love_word_at_dusk() # 傍晚情话
+    # await report_and_words.love_word_at_dusk() # 傍晚情话
     await report_and_words.get_up_time_report() # 起床报告
     await report_and_words.sleep_tip() # 晚上0点30 提醒
     await report_and_words.birthday()  # 饺子出生时间提醒
